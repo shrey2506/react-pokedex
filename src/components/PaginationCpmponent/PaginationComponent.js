@@ -1,11 +1,11 @@
 import React from 'react'
+import './PaginationComponent.css'
 
-const PaginationComponent = ({goToNextPage,goToPreviousPage}) => {
+const PaginationComponent = ({goToNextPage}) => {
 
   return (
-    <div>
-        { goToPreviousPage && <button onClick={goToPreviousPage}>Previous</button>}
-        { goToNextPage && <button onClick={goToNextPage}>Next</button>}
+    <div >
+        { goToNextPage && <button className='pagination-button' onClick={goToNextPage}>Load More</button>}
     </div>
   )
 }

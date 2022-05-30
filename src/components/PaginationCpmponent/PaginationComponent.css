@@ -1,0 +1,6 @@
+.pagination-button{
+    position: fixed;
+    z-index: 1;
+    bottom: 10px;
+    background-color: antiquewhite;
+}
