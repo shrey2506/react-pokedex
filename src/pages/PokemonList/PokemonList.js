@@ -12,25 +12,20 @@ const PokemonList = () => {
     const [nextPageUrl,setNextPageUrl]=useState()
     const [prevPageUrl,setPrevPageUrl]=useState()
     const [loading,setLoading]=useState(true)
-    const [searchedName,setSearchName]=useState([])
     const [expand,setExpand]=useState(false)
     const [expandedCardData,setExapnadedCardData]=useState([])
     const [colorArr,setColorArr]=useState([])
-
   
-  
-    const getPokemon=(pokemon)=>{
-      let data=[];
-
-      axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
-      .then(res=>{
-        data.push(res.data)
-      })
-      console.log(data)
-      return data
-     
-    }
-
+    const handleSearch=async(e)=>{
+      e.preventDefault()
+      let searchedName= e.target.value
+      let res=pokemon.filter((x)=> x.name.includes(searchedName)||x.name===searchedName)
+      setPokemom(res)
+      if(searchedName===''){
+         fetchData()
+      }
+     }
+ 
     const fetchData=async ()=>{
         setPokemom([])
         await axios.get(currentPageUrl).then(res=>{
@@ -41,7 +36,6 @@ const PokemonList = () => {
               await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`)
               .then( res=>{
                 setPokemom(currentList=>[...currentList,res.data])
-               
               })
             })
           }
@@ -62,7 +56,6 @@ const PokemonList = () => {
                   await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon.pokemon.name}`)
                   .then(res=>{
                       setPokemom(oldArray => [...oldArray,res.data])
-                     
                   })
                 })
               }
@@ -116,13 +109,12 @@ const PokemonList = () => {
    
   return (
     <div className='list-container'>
-        {/* <input placeholder='Search Pokemon' type='text' onChange={searchPokemon}/>
-                  {searchedName.length!==0 && 
-                        <div>
-                          Search Result: {searchedName.name}
-                        </div>
-                  } */}
-         <button  className='filter-button' style={{background: 'black'}} onClick={showFilters}>Filters</button>  
+      <div className='row'>
+         <input className='search-bar' placeholder='Search Pokemon' type='text' onChange={handleSearch}/>
+         <button  className='filter-button' style={{background: 'black'}} onClick={showFilters}>Filters</button> 
+
+      </div>
+        
          <div className='filter-grid'>
           {colorArr && colorArr.map((color,i)=>{
             let background=colors[color]
@@ -137,13 +129,14 @@ const PokemonList = () => {
           {colorArr.length!==0 && <button  className='filter-button' style={{background: 'black'}} onClick={fetchData}>Clear</button>  }
         </div>
         <div className='grid'>
-                {pokemon &&  pokemon.sort((a,b)=>a.id-b.id).map((p,i)=>{
+                {pokemon && pokemon.sort((a,b)=>a.id-b.id).map((p,i)=>{
                     return(
                        <PokemonCard pokemon={p} expand={expand} exapandCard={exapandCard} func filter={filterPokemon} key={i}/>
                     )
                 })}
         </div>  
         {expand===true && expandedCardData.length!==0 ? <ExpandedCard expandedCardData={expandedCardData} setExpand={setExpand} /> : null}
+
         <PaginationComponent  
             goToNextPage={nextPageUrl? goToNextPage: null}
             goToPrevPage={prevPageUrl? goToPrevPage:null}
