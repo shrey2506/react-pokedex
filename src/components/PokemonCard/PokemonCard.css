@@ -17,4 +17,40 @@
 .card-img{
     height: 60%;
     width: 60%;
+    max-height: 200px;
+    max-width: 200px;
+}
+
+.pokemon-id{
+    border: 0.5px black solid;
+    max-width: 500px;
+    background: white;
+    border-radius: 15px;
+    padding: 2px 5px;
+    margin: 1px;
+    font-size: 15px;
+    font-weight: 800;
+}
+.type-row{
+    display: flex;
+    flex-direction: row;
+}
+
+.type{
+    background: white;
+    color: white;
+    margin: 2px 5px;
+    padding: 3px 5px;
+    font-weight: 800;
+    border-radius: 15px;
+    border: 2px solid;
+}
+
+.move{
+    background: white;
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 2px 4px;
+    margin: 3px 10px;
+    font-weight: 500;
 }
