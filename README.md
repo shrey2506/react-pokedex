@@ -1,5 +1,13 @@
 # Getting Started with Create React App
 
+Host link of the project:- [Link](https://ubiquitous-mandazi-ef81d4.netlify.app/)
+
+Project Features:-
+1. Displays the list of all pokmeons with all necessary information.
+2. Filter functionality based on the pokemon types.
+3. Search functionality
+4. The web app is also web responsive.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
